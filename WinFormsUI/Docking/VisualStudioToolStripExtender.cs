@@ -12,7 +12,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             private VsVersion version = VsVersion.Unknown;
             private readonly ToolStrip strip;
-            private readonly Dictionary<ToolStripItem, string> menuText = new Dictionary<ToolStripItem, string>();
+            private readonly Dictionary<ToolStripItem, string> menuText = new();
             
 
             public ToolStripProperties(ToolStrip toolstrip)
@@ -26,11 +26,11 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public VsVersion VsVersion 
             {
-                get { return this.version; }
+                get { return version; }
                 set
                 {
-                    this.version = value;
-                    UpdateMenuText(this.version == VsVersion.Vs2012 || this.version == VsVersion.Vs2013);
+                    version = value;
+                    UpdateMenuText(version == VsVersion.Vs2012 || version == VsVersion.Vs2013);
                 }
             }
 
@@ -50,7 +50,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        private readonly Dictionary<ToolStrip, ToolStripProperties> strips = new Dictionary<ToolStrip, ToolStripProperties>();
+        private readonly Dictionary<ToolStrip, ToolStripProperties> strips = new();
 
         public VisualStudioToolStripExtender()
         {

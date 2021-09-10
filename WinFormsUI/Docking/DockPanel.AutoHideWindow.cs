@@ -89,7 +89,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 m_activePane = value;
             }
 
-            private static readonly object AutoHideActiveContentChangedEvent = new object();
+            private static readonly object AutoHideActiveContentChangedEvent = new();
             public event EventHandler ActiveContentChanged
             {
                 add { Events.AddHandler(AutoHideActiveContentChangedEvent, value); }
@@ -251,7 +251,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
                     while (true)
                     {
-                        TimeSpan time = new TimeSpan(0, 0, 0, 0, ANIMATE_TIME);
+                        TimeSpan time = new(0, 0, 0, 0, ANIMATE_TIME);
                         TimeSpan elapsedPerMove = DateTime.Now - startPerMove;
                         TimeSpan elapsedTime = DateTime.Now - startingTime;
                         if (((int)((time - elapsedTime).TotalMilliseconds)) <= 0)

@@ -60,7 +60,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 public LocalWindowsHook(Win32.HookType hook)
                 {
                     m_hookType = hook;
-                    m_filterFunc = new NativeMethods.HookProc(this.CoreHookProc);
+                    m_filterFunc = new NativeMethods.HookProc(CoreHookProc);
                 }
 
                 // Default filter function
@@ -70,7 +70,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         return NativeMethods.CallNextHookEx(m_hHook, code, wParam, lParam);
 
                     // Let clients determine what to do
-                    HookEventArgs e = new HookEventArgs();
+                    HookEventArgs e = new();
                     e.HookCode = code;
                     e.wParam = wParam;
                     e.lParam = lParam;
@@ -214,7 +214,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 NativeMethods.SetFocus(handler.Form.Handle);
             }
 
-            private List<IDockContent> m_listContent = new List<IDockContent>();
+            private List<IDockContent> m_listContent = new();
             private List<IDockContent> ListContent
             {
                 get { return m_listContent; }
@@ -567,7 +567,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             get { return FocusManager.ActiveDocumentPane; }
         }
 
-        private static readonly object ActiveDocumentChangedEvent = new object();
+        private static readonly object ActiveDocumentChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveDocumentChanged_Description")]
         public event EventHandler ActiveDocumentChanged
@@ -582,7 +582,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, e);
         }
 
-        private static readonly object ActiveContentChangedEvent = new object();
+        private static readonly object ActiveContentChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveContentChanged_Description")]
         public event EventHandler ActiveContentChanged
@@ -598,7 +598,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, e);
         }
 
-        private static readonly object DocumentDraggedEvent = new object();
+        private static readonly object DocumentDraggedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActiveContentChanged_Description")]
         public event EventHandler DocumentDragged
@@ -614,7 +614,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, EventArgs.Empty);
         }
 
-        private static readonly object ActivePaneChangedEvent = new object();
+        private static readonly object ActivePaneChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("DockPanel_ActivePaneChanged_Description")]
         public event EventHandler ActivePaneChanged

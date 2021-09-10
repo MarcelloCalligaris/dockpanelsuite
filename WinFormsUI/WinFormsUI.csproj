@@ -10,8 +10,6 @@
 
     <RootNamespace>WeifenLuo.WinFormsUI</RootNamespace>
     <AssemblyName>WeifenLuo.WinFormsUI.Docking</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>dockpanelsuite.snk</AssemblyOriginatorKeyFile>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
       <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>

@@ -247,7 +247,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                         //}
                     }
 
-                    Region region = new Region(Rectangle.Empty);
+                    Region region = new(Rectangle.Empty);
                     Rectangle rectDockArea = FullPanelEdge ? DockPanel.DockArea : DockPanel.DocumentWindowBounds;
 
                     rectDockArea = RectangleToClient(DockPanel.RectangleToScreen(rectDockArea));
@@ -310,7 +310,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                                     new Point(PaneDiamond.Right, PaneDiamond.Top),
                                     new Point(PaneDiamond.Left, PaneDiamond.Bottom)
                                 };
-                            using (Matrix matrix = new Matrix(PaneDiamond.ClientRectangle, pts))
+                            using (Matrix matrix = new(PaneDiamond.ClientRectangle, pts))
                             {
                                 graphicsPath.Transform(matrix);
                             }

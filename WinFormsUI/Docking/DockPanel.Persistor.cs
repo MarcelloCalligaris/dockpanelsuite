@@ -325,7 +325,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 xmlOut.WriteEndElement();
 
                 // FloatWindows
-                RectangleConverter rectConverter = new RectangleConverter();
+                RectangleConverter rectConverter = new();
                 xmlOut.WriteStartElement("FloatWindows");
                 xmlOut.WriteAttributeString("Count", dockPanel.FloatWindows.Count.ToString(CultureInfo.InvariantCulture));
                 foreach (FloatWindow fw in dockPanel.FloatWindows)
@@ -401,7 +401,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private static PaneStruct[] LoadPanes(XmlTextReader xmlIn)
             {
-                EnumConverter dockStateConverter = new EnumConverter(typeof(DockState));
+                EnumConverter dockStateConverter = new(typeof(DockState));
                 int countOfPanes = Convert.ToInt32(xmlIn.GetAttribute("Count"), CultureInfo.InvariantCulture);
                 PaneStruct[] panes = new PaneStruct[countOfPanes];
                 MoveToNextElement(xmlIn);
@@ -437,8 +437,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private static DockWindowStruct[] LoadDockWindows(XmlTextReader xmlIn, DockPanel dockPanel)
             {
-                EnumConverter dockStateConverter = new EnumConverter(typeof(DockState));
-                EnumConverter dockAlignmentConverter = new EnumConverter(typeof(DockAlignment));
+                EnumConverter dockStateConverter = new(typeof(DockState));
+                EnumConverter dockAlignmentConverter = new(typeof(DockAlignment));
                 int countOfDockWindows = dockPanel.DockWindows.Count;
                 DockWindowStruct[] dockWindows = new DockWindowStruct[countOfDockWindows];
                 MoveToNextElement(xmlIn);
@@ -474,8 +474,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             private static FloatWindowStruct[] LoadFloatWindows(XmlTextReader xmlIn)
             {
-                EnumConverter dockAlignmentConverter = new EnumConverter(typeof(DockAlignment));
-                RectangleConverter rectConverter = new RectangleConverter();
+                EnumConverter dockAlignmentConverter = new(typeof(DockAlignment));
+                RectangleConverter rectConverter = new();
                 int countOfFloatWindows = Convert.ToInt32(xmlIn.GetAttribute("Count"), CultureInfo.InvariantCulture);
                 FloatWindowStruct[] floatWindows = new FloatWindowStruct[countOfFloatWindows];
                 MoveToNextElement(xmlIn);

@@ -17,7 +17,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             SetStyle(ControlStyles.Selectable, false);
         }
 
-        private DockPane m_dockPane;
+        private readonly DockPane m_dockPane;
         public DockPane DockPane
         {
             get { return m_dockPane; }
@@ -59,8 +59,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 DockPane.DockPanel.BeginDrag(DockPane);
             }
         }
-
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]         
+  
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)

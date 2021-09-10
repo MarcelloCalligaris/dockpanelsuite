@@ -54,7 +54,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             InternalConstruct(content, visibleState, false, Rectangle.Empty, null, DockAlignment.Right, 0.5, show);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
         internal protected DockPane(IDockContent content, FloatWindow floatWindow, bool show)
         {
             if (floatWindow == null)
@@ -70,7 +69,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             InternalConstruct(content, previousPane.DockState, false, Rectangle.Empty, previousPane, alignment, proportion, show);
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
         internal protected DockPane(IDockContent content, Rectangle floatWindowBounds, bool show)
         {
             InternalConstruct(content, DockState.Float, true, floatWindowBounds, null, DockAlignment.Right, 0.5, show);
@@ -114,7 +112,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             SetDockState(dockState);
             if (show)
                 content.DockHandler.Pane = this;
-            else if (this.IsFloat)
+            else if (IsFloat)
                 content.DockHandler.FloatPane = this;
             else
                 content.DockHandler.PanelPane = this;
@@ -271,8 +269,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (menu == null)
                 return;
 
-            ContextMenuStrip contextMenuStrip = menu as ContextMenuStrip;
-            if (contextMenuStrip != null)
+            if (menu is ContextMenuStrip contextMenuStrip)
             {
                 contextMenuStrip.Show(control, position);
                 return;
@@ -370,7 +367,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 int width = rectWindow.Width;
                 int height = TabStripControl.MeasureHeight();
 
-                int y = 0;
+                int y;
                 if (DockPanel.DocumentTabStripLocation == DocumentTabStripLocation.Bottom)
                     y = rectWindow.Height - height;
                 else
@@ -602,7 +599,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (DockState == DockState.Document && DockPanel.DocumentStyle == DocumentStyle.DockingMdi)
                 rectContent = DockPanel.RectangleToMdiClient(RectangleToScreen(rectContent));
 
-            Rectangle rectInactive = new Rectangle(-rectContent.Width, rectContent.Y, rectContent.Width, rectContent.Height);
+            Rectangle rectInactive = new(-rectContent.Width, rectContent.Y, rectContent.Width, rectContent.Height);
             foreach (IDockContent content in Contents)
                 if (content.DockHandler.Pane == this)
                 {
@@ -778,7 +775,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 ActiveContent = null;
         }
 
-        private static readonly object DockStateChangedEvent = new object();
+        private static readonly object DockStateChangedEvent = new();
         public event EventHandler DockStateChanged
         {
             add { Events.AddHandler(DockStateChangedEvent, value); }
@@ -786,12 +783,10 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnDockStateChanged(EventArgs e)
         {
-            EventHandler handler = (EventHandler)Events[DockStateChangedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler)Events[DockStateChangedEvent])?.Invoke(this, e);
         }
 
-        private static readonly object IsActivatedChangedEvent = new object();
+        private static readonly object IsActivatedChangedEvent = new();
         public event EventHandler IsActivatedChanged
         {
             add { Events.AddHandler(IsActivatedChangedEvent, value); }
@@ -799,12 +794,10 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnIsActivatedChanged(EventArgs e)
         {
-            EventHandler handler = (EventHandler)Events[IsActivatedChangedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler)Events[IsActivatedChangedEvent])?.Invoke(this, e);
         }
 
-        private static readonly object IsActiveDocumentPaneChangedEvent = new object();
+        private static readonly object IsActiveDocumentPaneChangedEvent = new();
         public event EventHandler IsActiveDocumentPaneChanged
         {
             add { Events.AddHandler(IsActiveDocumentPaneChangedEvent, value); }
@@ -812,9 +805,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
         protected virtual void OnIsActiveDocumentPaneChanged(EventArgs e)
         {
-            EventHandler handler = (EventHandler)Events[IsActiveDocumentPaneChangedEvent];
-            if (handler != null)
-                handler(this, e);
+            ((EventHandler)Events[IsActiveDocumentPaneChangedEvent])?.Invoke(this, e);
         }
 
         public DockWindow DockWindow
@@ -881,7 +872,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (value == DockState.Unknown || value == DockState.Hidden)
                 throw new InvalidOperationException(Strings.DockPane_SetDockState_InvalidState);
 
-            if ((value == DockState.Float) == this.IsFloat)
+            if ((value == DockState.Float) == IsFloat)
             {
                 InternalSetDockState(value);
                 return this;
@@ -1061,7 +1052,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (container == null)
                 throw new InvalidOperationException(Strings.DockPane_DockTo_NullContainer);
 
-            if (container.IsFloat == this.IsFloat)
+            if (container.IsFloat == IsFloat)
             {
                 InternalAddToDockList(container, previousPane, alignment, proportion);
                 return this;
@@ -1206,7 +1197,6 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             DockPanel.SuspendLayout(true);
 
-            IDockContent activeContent = DockPanel.ActiveContent;
 
             for (int i = DisplayingContents.Count - 1; i >= 0; i--)
             {
@@ -1217,8 +1207,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             DockPanel.ResumeLayout(true, true);
         }
-
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (int)Win32.Msgs.WM_MOUSEACTIVATE)

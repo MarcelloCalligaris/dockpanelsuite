@@ -11,10 +11,9 @@ namespace WeifenLuo.WinFormsUI.Docking
 {
     public abstract class DockPaneStripBase : Control
     {
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]        
         protected internal class Tab : IDisposable
         {
-            private IDockContent m_content;
+            private readonly IDockContent m_content;
 
             public Tab(IDockContent content)
             {
@@ -67,7 +66,6 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1034:NestedTypesShouldNotBeVisible")]        
         protected sealed class TabCollection : IEnumerable<Tab>
         {
             #region IEnumerable Members
@@ -89,7 +87,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 m_dockPane = pane;
             }
 
-            private DockPane m_dockPane;
+            private readonly DockPane m_dockPane;
             public DockPane DockPane
             {
                 get { return m_dockPane; }
@@ -144,7 +142,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             AllowDrop = true;
         }
 
-        private DockPane m_dockPane;
+        private readonly DockPane m_dockPane;
         protected DockPane DockPane
         {
             get { return m_dockPane; }
@@ -161,7 +159,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             get
             {
-                return m_tabs ?? (m_tabs = new TabCollection(DockPane));
+                return m_tabs ??= new TabCollection(DockPane);
             }
         }
 
@@ -276,7 +274,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         {
             if (index > 0 && DockPane.DockPanel.DocumentStyle == DocumentStyle.DockingWindow)
             {
-                index = index - 1;
+                index--;
 
                 if (index >= 0 || index < Tabs.Count)                
                     DockPane.ActiveContent = Tabs[index].Content;                
@@ -291,7 +289,6 @@ namespace WeifenLuo.WinFormsUI.Docking
                 ShowTabPageContextMenu(new Point(e.X, e.Y));
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == (int)Win32.Msgs.WM_LBUTTONDBLCLK)
@@ -351,7 +348,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         public class DockPaneStripAccessibleObject : Control.ControlAccessibleObject
         {
-            private DockPaneStripBase _strip;
+            private readonly DockPaneStripBase _strip;
 
             public DockPaneStripAccessibleObject(DockPaneStripBase strip)
                 : base(strip)
@@ -379,7 +376,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject HitTest(int x, int y)
             {
-                Point point = new Point(x, y);
+                Point point = new(x, y);
                 foreach (Tab tab in _strip.Tabs)
                 {
                     Rectangle rectangle = _strip.GetTabBounds(tab);
@@ -393,10 +390,10 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         protected class DockPaneStripTabAccessibleObject : AccessibleObject
         {
-            private DockPaneStripBase _strip;
-            private Tab _tab;
+            private readonly DockPaneStripBase _strip;
+            private readonly Tab _tab;
 
-            private AccessibleObject _parent;
+            private readonly AccessibleObject _parent;
 
             internal DockPaneStripTabAccessibleObject(DockPaneStripBase strip, Tab tab, AccessibleObject parent)
             {

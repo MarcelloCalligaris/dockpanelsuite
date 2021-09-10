@@ -115,13 +115,13 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (IsMouseOver && Enabled)
             {
-                using (Pen pen = new Pen(ForeColor))
+                using (Pen pen = new(ForeColor))
                 {
                     e.Graphics.DrawRectangle(pen, Rectangle.Inflate(ClientRectangle, -1, -1));
                 }
             }
 
-            using (ImageAttributes imageAttributes = new ImageAttributes())
+            using (ImageAttributes imageAttributes = new())
             {
                 ColorMap[] colorMap = new ColorMap[2];
                 colorMap[0] = new ColorMap();

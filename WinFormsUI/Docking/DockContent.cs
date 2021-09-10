@@ -15,15 +15,15 @@ namespace WeifenLuo.WinFormsUI.Docking
             if (PatchController.EnableFontInheritanceFix != true)
             {
                 //Suggested as a fix by bensty regarding form resize
-                this.ParentChanged += new EventHandler(DockContent_ParentChanged);
+                ParentChanged += new EventHandler(DockContent_ParentChanged);
             }
         }
 
         //Suggested as a fix by bensty regarding form resize
         private void DockContent_ParentChanged(object Sender, EventArgs e)
         {
-            if (this.Parent != null)
-                this.Font = this.Parent.Font;
+            if (Parent != null)
+                Font = Parent.Font;
         }
 
         private DockContentHandler m_dockHandler = null;
@@ -304,12 +304,12 @@ namespace WeifenLuo.WinFormsUI.Docking
         #region IDockContent Members
         void IDockContent.OnActivated(EventArgs e)
         {
-            this.OnActivated(e);
+            OnActivated(e);
         }
 
         void IDockContent.OnDeactivate(EventArgs e)
         {
-            this.OnDeactivate(e);
+            OnDeactivate(e);
         }
         #endregion
 
@@ -319,7 +319,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             OnDockStateChanged(e);
         }
 
-        private static readonly object DockStateChangedEvent = new object();
+        private static readonly object DockStateChangedEvent = new();
         [LocalizedCategory("Category_PropertyChanged")]
         [LocalizedDescription("Pane_DockStateChanged_Description")]
         public event EventHandler DockStateChanged

@@ -114,7 +114,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                     //Manually pre-filter message, rather than using
                     //Application.AddMessageFilter(this).  This fixes
                     //the docker control for ActiveX objects
-                    this.OnPreFilterMessage(ref m);
+                    OnPreFilterMessage(ref m);
                 }
 
                 if (m.Msg == (int)Win32.Msgs.WM_CANCELMODE || m.Msg == (int)Win32.Msgs.WM_CAPTURECHANGED)

@@ -861,7 +861,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     if (!Win32Helper.IsRunningOnMono)
                     {
-                        DockPanel.ContentFocusManager.GiveUpFocus(this.Content);
+                        DockPanel.ContentFocusManager.GiveUpFocus(Content);
                     }
                 }
                 else
@@ -1041,7 +1041,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
 
         #region Events
-        private static readonly object DockStateChangedEvent = new object();
+        private static readonly object DockStateChangedEvent = new();
         public event EventHandler DockStateChanged
         {
             add { Events.AddHandler(DockStateChangedEvent, value); }
@@ -1139,7 +1139,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         Rectangle IDockDragSource.BeginDrag(Point ptMouse)
         {
             Size size;
-            DockPane floatPane = this.FloatPane;
+            DockPane floatPane = FloatPane;
             if (DockState == DockState.Float || floatPane == null || floatPane.FloatWindow.NestedPanes.Count != 1)
                 size = DockPanel.DefaultFloatWindowSize;
             else

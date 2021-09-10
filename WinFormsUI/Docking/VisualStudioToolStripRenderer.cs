@@ -268,7 +268,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 if (button.Selected || button.Checked)
                 {
                     // Rect of item's content area.
-                    Rectangle contentRect = new Rectangle(0, 0, button.Width - 1, button.Height - 1);
+                    Rectangle contentRect = new(0, 0, button.Width - 1, button.Height - 1);
 
                     Color pen;
                     Color brushBegin;
@@ -504,11 +504,11 @@ namespace WeifenLuo.WinFormsUI.Docking
         private static void DrawRectangle(Graphics graphics, Rectangle rect, Color brushBegin, 
             Color brushMiddle, Color brushEnd, Color penColor, bool glass)
         {
-            RectangleF firstHalf = new RectangleF(
+            RectangleF firstHalf = new(
                 rect.X, rect.Y, 
                 rect.Width, (float)rect.Height / 2);
 
-            RectangleF secondHalf = new RectangleF(
+            RectangleF secondHalf = new(
                 rect.X, rect.Y + (float)rect.Height / 2, 
                 rect.Width, (float)rect.Height / 2);
 
@@ -562,7 +562,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private static void FillRoundRectangle(Graphics graphics, Brush brush, float x, float y, float width, float height, float radius)
         {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
+            RectangleF rectangle = new(x, y, width, height);
             GraphicsPath path = GetRoundedRect(rectangle, radius);
             graphics.FillPath(brush, path);
         }
@@ -579,7 +579,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private static void DrawRoundRectangle(Graphics graphics, Pen pen, float x, float y, float width, float height, float radius)
         {
-            RectangleF rectangle = new RectangleF(x, y, width, height);
+            RectangleF rectangle = new(x, y, width, height);
             GraphicsPath path = GetRoundedRect(rectangle, radius);
             graphics.DrawPath(pen, path);
         }
@@ -591,7 +591,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             if (radius <= 0)
             {
-                GraphicsPath mPath = new GraphicsPath();
+                GraphicsPath mPath = new();
                 mPath.AddRectangle(baseRect);
                 mPath.CloseFigure();
                 return mPath;
@@ -608,9 +608,9 @@ namespace WeifenLuo.WinFormsUI.Docking
             // a graphics path object for the drawing 
 
             float diameter = radius * 2.0F;
-            SizeF sizeF = new SizeF(diameter, diameter);
-            RectangleF arc = new RectangleF(baseRect.Location, sizeF);
-            GraphicsPath path = new GraphicsPath();
+            SizeF sizeF = new(diameter, diameter);
+            RectangleF arc = new(baseRect.Location, sizeF);
+            GraphicsPath path = new();
 
             // top left arc 
             path.AddArc(arc, 180, 90);
@@ -634,7 +634,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private static GraphicsPath GetCapsule(RectangleF baseRect)
         {
             RectangleF arc;
-            GraphicsPath path = new GraphicsPath();
+            GraphicsPath path = new();
 
             try
             {
@@ -643,7 +643,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     // return horizontal capsule 
                     diameter = baseRect.Height;
-                    SizeF sizeF = new SizeF(diameter, diameter);
+                    SizeF sizeF = new(diameter, diameter);
                     arc = new RectangleF(baseRect.Location, sizeF);
                     path.AddArc(arc, 90, 180);
                     arc.X = baseRect.Right - diameter;
@@ -653,7 +653,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 {
                     // return vertical capsule 
                     diameter = baseRect.Width;
-                    SizeF sizeF = new SizeF(diameter, diameter);
+                    SizeF sizeF = new(diameter, diameter);
                     arc = new RectangleF(baseRect.Location, sizeF);
                     path.AddArc(arc, 180, 180);
                     arc.Y = baseRect.Bottom - diameter;

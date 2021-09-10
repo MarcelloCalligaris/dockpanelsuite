@@ -611,7 +611,8 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject HitTest(int x, int y)
             {
-                Dictionary<DockState, Rectangle> rectangles = new Dictionary<DockState, Rectangle> {
+                Dictionary<DockState, Rectangle> rectangles = new()
+                {
                     { DockState.DockTopAutoHide,    _strip.GetTabStripRectangle(DockState.DockTopAutoHide) },
                     { DockState.DockBottomAutoHide, _strip.GetTabStripRectangle(DockState.DockBottomAutoHide) },
                     { DockState.DockLeftAutoHide,   _strip.GetTabStripRectangle(DockState.DockLeftAutoHide) },
@@ -671,7 +672,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             public override AccessibleObject GetChild(int index)
             {
-                List<Tab> tabs = new List<Tab>();
+                List<Tab> tabs = new();
                 foreach (Pane pane in _strip.GetPanes(_state))
                 {
                     tabs.AddRange(pane.AutoHideTabs);

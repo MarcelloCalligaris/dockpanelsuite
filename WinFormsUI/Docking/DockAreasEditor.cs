@@ -86,7 +86,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 checkBoxDockFill.Dock = System.Windows.Forms.DockStyle.Fill;
                 checkBoxDockFill.FlatStyle = FlatStyle.System;
 
-                this.Controls.AddRange(new Control[] {
+                Controls.AddRange(new Control[] {
                                                          checkBoxDockFill,
                                                          checkBoxDockBottom,
                                                          checkBoxDockTop,

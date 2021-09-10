@@ -236,7 +236,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             }
         }
 
-        private DockContentCollection m_contents = new DockContentCollection();
+        private DockContentCollection m_contents = new();
         [Browsable(false)]
         public DockContentCollection Contents
         {
@@ -741,7 +741,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 return;
 
             Graphics g = e.Graphics;
-            SolidBrush bgBrush = new SolidBrush(DockBackColor);
+            SolidBrush bgBrush = new(DockBackColor);
             g.FillRectangle(bgBrush, ClientRectangle);
         }
 
@@ -887,7 +887,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         protected override void OnParentChanged(EventArgs e)
         {
             SetAutoHideWindowParent();
-            GetMdiClientController().ParentForm = (this.Parent as Form);
+            GetMdiClientController().ParentForm = (Parent as Form);
             base.OnParentChanged (e);
         }
 
@@ -896,7 +896,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             Control parent;
             if (DocumentStyle == DocumentStyle.DockingMdi ||
                 DocumentStyle == DocumentStyle.SystemMdi)
-                parent = this.Parent;
+                parent = Parent;
             else
                 parent = this;
             if (AutoHideWindow.Parent != parent)
@@ -972,12 +972,12 @@ namespace WeifenLuo.WinFormsUI.Docking
 
         private void UpdateWindowRegion()
         {
-            if (this.DocumentStyle == DocumentStyle.DockingMdi)
+            if (DocumentStyle == DocumentStyle.DockingMdi)
                 UpdateWindowRegion_ClipContent();
-            else if (this.DocumentStyle == DocumentStyle.DockingSdi ||
-                this.DocumentStyle == DocumentStyle.DockingWindow)
+            else if (DocumentStyle == DocumentStyle.DockingSdi ||
+                DocumentStyle == DocumentStyle.DockingWindow)
                 UpdateWindowRegion_FullDocumentArea();
-            else if (this.DocumentStyle == DocumentStyle.SystemMdi)
+            else if (DocumentStyle == DocumentStyle.SystemMdi)
                 UpdateWindowRegion_EmptyDocumentArea();
         }
 
@@ -995,7 +995,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         private void UpdateWindowRegion_ClipContent()
         {
             int count = 0;
-            foreach (DockPane pane in this.Panes)
+            foreach (DockPane pane in Panes)
             {
                 if (!pane.Visible || pane.DockState != DockState.Document)
                     continue;
@@ -1011,7 +1011,7 @@ namespace WeifenLuo.WinFormsUI.Docking
 
             Rectangle[] rects = new Rectangle[count];
             int i = 0;
-            foreach (DockPane pane in this.Panes)
+            foreach (DockPane pane in Panes)
             {
                 if (!pane.Visible || pane.DockState != DockState.Document)
                     continue;
@@ -1035,7 +1035,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 Region = null;
             else
             {
-                Region region = new Region(new Rectangle(0, 0, this.Width, this.Height));
+                Region region = new(new Rectangle(0, 0, Width, Height));
                 foreach (Rectangle rect in m_clipRects)
                     region.Exclude(rect);
                 if (Region != null)
@@ -1086,7 +1086,7 @@ namespace WeifenLuo.WinFormsUI.Docking
             return false;
         }
 
-        private static readonly object ActiveAutoHideContentChangedEvent = new object();
+        private static readonly object ActiveAutoHideContentChangedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ActiveAutoHideContentChanged_Description")]
         public event EventHandler ActiveAutoHideContentChanged
@@ -1106,7 +1106,7 @@ namespace WeifenLuo.WinFormsUI.Docking
         }
 
 
-        private static readonly object ContentAddedEvent = new object();
+        private static readonly object ContentAddedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ContentAdded_Description")]
         public event EventHandler<DockContentEventArgs> ContentAdded
@@ -1121,7 +1121,7 @@ namespace WeifenLuo.WinFormsUI.Docking
                 handler(this, e);
         }
 
-        private static readonly object ContentRemovedEvent = new object();
+        private static readonly object ContentRemovedEvent = new();
         [LocalizedCategory("Category_DockingNotification")]
         [LocalizedDescription("DockPanel_ContentRemoved_Description")]
         public event EventHandler<DockContentEventArgs> ContentRemoved
