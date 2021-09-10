@@ -38,14 +38,14 @@ namespace WeifenLuo.WinFormsUI.Docking
             private const int ANIMATE_TIME = 100;    // in mini-seconds
             #endregion
 
-            private Timer m_timerMouseTrack;
+            private System.Windows.Forms.Timer m_timerMouseTrack;
             protected SplitterBase m_splitter { get; private set; }
 
             public AutoHideWindowControl(DockPanel dockPanel)
             {
                 m_dockPanel = dockPanel;
 
-                m_timerMouseTrack = new Timer();
+                m_timerMouseTrack = new System.Windows.Forms.Timer();
                 m_timerMouseTrack.Tick += new EventHandler(TimerMouseTrack_Tick);
 
                 Visible = false;

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <PackageId>DockPanelSuite.ThemeVS2005Multithreading</PackageId>
@@ -7,22 +7,13 @@
     <Authors>Weifen Luo and other contributors</Authors>
     <Description>Visual Studio 2005 theme for DockPanel Suite with multiple UI thread support. (Not recommended)</Description>
     <Copyright>(C) 2007-2020 Weifen Luo and other contributors</Copyright>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>http://dockpanelsuite.com</PackageProjectUrl>
-    <PackageReleaseNotes>
-      Release notes can be found at GitHub,
-      https://github.com/dockpanelsuite/dockpanelsuite/releases
-    </PackageReleaseNotes>
-    <TargetFrameworks>netcoreapp3.1;net35;net40</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
-    <StartupObject />
     <RootNamespace>WeifenLuo.WinFormsUI</RootNamespace>
     <AssemblyName>WeifenLuo.WinFormsUI.Docking.ThemeVS2005Multithreading</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>dockpanelsuite.snk</AssemblyOriginatorKeyFile>
-    <EnableDefaultItems>false</EnableDefaultItems>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <EnableDefaultItems>false</EnableDefaultItems>      
+      <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+      <UseWindowsForms>true</UseWindowsForms>
+      <MinimumPlatformVersion>10.0.19041.0</MinimumPlatformVersion>
+      <IsPublishable>False</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,7 +54,6 @@
     <Compile Include="ThemeVS2005\VS2005WindowSplitterControlFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dockpanelsuite.snk" />
     <None Include="license.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

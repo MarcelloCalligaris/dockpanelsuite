@@ -80,7 +80,7 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
             // Should not be allowed to select this control
             SetStyle(ControlStyles.Selectable, false);
 
-            m_timer = new Timer();
+            m_timer = new System.Windows.Forms.Timer();
             m_timer.Enabled = false;
             m_timer.Tick += new EventHandler(Timer_Tick);
         }
@@ -289,8 +289,8 @@ namespace WeifenLuo.WinFormsUI.ThemeVS2003
             set    {    m_repeatClickInterval = value;    }
         }
 
-        private Timer m_timer;
-        private Timer Timer
+        private System.Windows.Forms.Timer m_timer;
+        private System.Windows.Forms.Timer Timer
         {
             get    {    return m_timer;    }
         }
